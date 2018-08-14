@@ -32,7 +32,7 @@ customer_df$area.code <- NULL
 
 #missing value analysis
 sapply(customer_df,function(x)sum(is.na(x)))
-write(capture.output(sapply(df,function(x)sum(is.na(x)))), "missing_values.txt" )
+
 
 
 
@@ -88,7 +88,6 @@ ggplot(customer_df, aes(x=number.customer.service.calls, y=Churn)) +
 
 
 #Chi-Square Test for correlation with the Target Variable
-chisq.test(customer_df$state,customer_df$Churn)
 chisq.test(customer_df$international.plan,customer_df$Churn)
 chisq.test(customer_df$voice.mail.plan,customer_df$Churn)
 #The p-Values are relatively less and says they are dependent on the Target Variable
@@ -211,7 +210,6 @@ confusionMatrix(ConfMatrix_LG)
 library(class)
 
 #Predict test data
-
 scaled_train[,1:17] = scale(scaled_train[,1:17])
 scaled_test[,1:17] = scale(scaled_test[,1:17])
 KNN_Predictions = knn(scaled_train[,-18], scaled_test[,-18], 
@@ -221,6 +219,3 @@ KNN_Predictions = knn(scaled_train[,-18], scaled_test[,-18],
 #Confusion matrix
 Conf_matrix = table(scaled_test[,18], KNN_Predictions)
 confusionMatrix(Conf_matrix)
-
-
-
