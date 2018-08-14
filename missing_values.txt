@@ -1,22 +1,20 @@
                         state                account.length 
                             0                             0 
-                    area.code                  phone.number 
+                    area.code            international.plan 
                             0                             0 
-           international.plan               voice.mail.plan 
+              voice.mail.plan         number.vmail.messages 
                             0                             0 
-        number.vmail.messages             total.day.minutes 
+            total.day.minutes               total.day.calls 
                             0                             0 
-              total.day.calls              total.day.charge 
+             total.day.charge             total.eve.minutes 
                             0                             0 
-            total.eve.minutes               total.eve.calls 
+              total.eve.calls              total.eve.charge 
                             0                             0 
-             total.eve.charge           total.night.minutes 
+          total.night.minutes             total.night.calls 
                             0                             0 
-            total.night.calls            total.night.charge 
+           total.night.charge            total.intl.minutes 
                             0                             0 
-           total.intl.minutes              total.intl.calls 
+             total.intl.calls             total.intl.charge 
                             0                             0 
-            total.intl.charge number.customer.service.calls 
+number.customer.service.calls                         Churn 
                             0                             0 
-                        Churn 
-                            0 
