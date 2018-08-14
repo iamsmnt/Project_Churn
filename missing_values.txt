@@ -1,20 +1,2 @@
-                        state                account.length 
-                            0                             0 
-                    area.code            international.plan 
-                            0                             0 
-              voice.mail.plan         number.vmail.messages 
-                            0                             0 
-            total.day.minutes               total.day.calls 
-                            0                             0 
-             total.day.charge             total.eve.minutes 
-                            0                             0 
-              total.eve.calls              total.eve.charge 
-                            0                             0 
-          total.night.minutes             total.night.calls 
-                            0                             0 
-           total.night.charge            total.intl.minutes 
-                            0                             0 
-             total.intl.calls             total.intl.charge 
-                            0                             0 
-number.customer.service.calls                         Churn 
-                            0                             0 
+  x df1 df2 ncp log     
+  0   0   0   0   0   0 
