@@ -131,6 +131,20 @@ cdf_test$Churn <- as.factor(cdf_test$Churn)
 dt_model = C5.0(Churn ~ ., data = cdf_train,trials = 100, rules = FALSE)
 summary(dt_model)
 
+fit <- rpart(Churn ~ .,method="class", data=cdf_train)
+printcp(fit) # display the results 
+plotcp(fit) # visualize cross-validation results 
+summary(fit) # detailed summary of splits
+
+# plot tree 
+plot(fit, uniform=TRUE, 
+     main="Classification Tree for Churn")
+text(fit, use.n=TRUE, all=TRUE, cex=.8  )
+
+
+
+
+
 #Predictions with the Training Data
 DT_pred = predict(dt_model, cdf_test, type = "class")
 
