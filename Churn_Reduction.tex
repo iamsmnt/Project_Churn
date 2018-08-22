@@ -50,7 +50,7 @@
 \begin{document}
 
 \title{Customer Churn Reduction}
-\author{Somnath Mahato}
+\author{\textit{Somnath Mahato}}
 \maketitle
 
 
@@ -160,7 +160,7 @@ The table represent the features used in the training and analysis
 \end{table} 
 \FloatBarrier
 \subsection{Visualizations}
-We tried to plot the number of customers by the state. The heatmap Fig:\ref{fig:1.1} represents the number of customers per state
+We tried to plot the number of customers by the state. The heatmap Fig:\ref{fig:1.1} represents the number of customers per state Python code :\ref{lst:B.6}\\
 \begin{figure}[h]
 \vspace{-4pt}
 \center
@@ -256,7 +256,7 @@ The results shows a good accuracy however the recall for these models are not ac
 \vspace{-5pt}
 \centering
 \includegraphics[scale = 0.7]{Imb_ROC.PNG}
-\caption{Initial ROC plot}
+\caption{Initial ROC plot(See Python Code Fig: \ref{lst:B.1})}
 \label{fig:3.3}
 \end{figure}
 \FloatBarrier
@@ -311,7 +311,7 @@ After resampling using the Synthetic Method the models are trained with the a ba
 \begin{figure}[!htbp]
 \vspace{-100pt}
 \centering
-\includegraphics[scale = 0.8]{Balanced_ROC.PNG}
+\includegraphics[width = \textwidth]{Balanced_ROC.PNG}
 \caption{ROC on Balanced Data}
 \label{fig:3.6}
 \end{figure}
@@ -319,9 +319,204 @@ After resampling using the Synthetic Method the models are trained with the a ba
 The shown ROC curve depicts better performance with a balanced dataset. There is significant difference in both the ROC curve and we can conclude that Target Class Imbalance has made the model to perform with a better Recall and hence the aim of Reducing the Churn with a decent Recall solves the issue.
 
 
-\chapter{Conclusions}
+\chapter{Conclusion}
+\section{Model Evaluation}
+The metrics to evaluate a machine learning model is very important. Choice of metrics influences how the performance of machine learning algorithms is measured and compared. 
+We can use classification performance metrics such as:\\
+\textit{Log-Loss}\\
+\textit{Accuracy}\\
+\textit{AUC(Area under Curve)} etc\\
+Another example of metric for evaluation of machine learning algorithms is precision, recall, which can be used for sorting algorithms primarily used by search engines.\\
 
 
+\subsection{Precision}
+With the evaluation on all the models we can conclude that our predictive performance parameter is the Precision Rate by which we can accurately predict the number of customers that will churn out.
+
+
+\begin{lstlisting}[language=R, caption=RF performance]
+> confusionMatrix(ConfMatrix_RF)
+Confusion Matrix and Statistics
+
+   RF_Predictions
+       0    1
+  0 1253    9
+  1   40  173
+                                          
+               Accuracy : 0.9668          
+                 95\% CI : (0.9563, 0.9753)
+    No Information Rate : 0.8766          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.8569          
+ Mcnemar's Test P-Value : 1.822e-05       
+                                          
+            Sensitivity : 0.9691          
+            Specificity : 0.9505          
+         Pos Pred Value : 0.9929          
+         Neg Pred Value : 0.8122          
+             Prevalence : 0.8766          
+         Detection Rate : 0.8495          
+   Detection Prevalence : 0.8556          
+      Balanced Accuracy : 0.9598          
+                                          
+       'Positive' Class : 0           
+\end{lstlisting}
+Better predictions on the Churning ratio is obtained with the Random Forest Model and hence it can be selected as the final model to precisely predict upon the parameters to that can lead to the cancellation of service by a customer. 
+\subsection{AUC/ROC}
+The final model that can be perfectly classify among the two kinds of customer is the Random Forest Model.
+\begin{figure}[!htbp]
+\vspace{5pt}
+\centering
+\includegraphics[scale = 0.5]{Balanced_ROC.PNG}
+\caption{ROC on Balanced Data}
+\label{fig:4.1}
+\end{figure}
+\FloatBarrier
+\section{Model Selection}
+
+With the obtained results we can say the model on Random FOrest is a decent predictor of the Churn Class and we can finalize  this model for the approach ROC Fig: \ref{fig:A.4} .
+\subsection{Important Variables}
+The important variables for the churn are:\\
+1. Total day Minutes which relates to the day charges\\
+2. International Plan\\
+3. Number of Customer Service Calls\\
+\begin{figure}[!htbp]
+\vspace{5pt}
+\centering
+\includegraphics[scale = 0.5]{varz_imp.png}
+\caption{Important Variables in Analysis}
+\label{fig:4.2}
+\end{figure}
+\FloatBarrier
+Python Code here: \ref{lst:B.7}
+
+\appendix
+\chapter{Extra Figures}
+\begin{figure}[!htbp]
+\vspace{-5pt}
+\centering
+\includegraphics[scale = 1]{corrplot.jpeg}
+\caption{R corrplot (See R code in appendix \ref{lst:B.5})}
+\label{fig:A.1}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htbp]
+\vspace{-10pt}
+\centering
+\includegraphics[scale = 0.6]{CustCallVsChurn.jpeg}
+\caption{Linear Graph for relation with target variable (See R code in appendix \ref{lst:B.4})}
+\label{fig:A.2}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htbp]
+\vspace{70pt}
+\centering
+\includegraphics[scale = 0.6]{RoC_RandomForest.jpeg}
+\caption{ROC for the Random Forest Model (See R code in appendix \ref{lst:B.2})}
+\label{fig:A.3}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[!htbp]
+\vspace{-100pt}
+\centering
+\includegraphics[width = \textwidth]{var_imp.jpeg}
+\caption{Variable Importance for Random Forest(See R code in appendix \ref{lst:B.3})}
+\label{fig:A.4}
+\end{figure}
+\FloatBarrier
+
+\chapter{Code}
+
+\begin{lstlisting}[language=Python, caption= Multiple ROC Model,label=lst:B.1]
+
+model_predictions = [pred1,pred2,pred3,pred4] #list for every models predictions
+models = ['Decision_Trees','KNN','Logistic','RF'] #list to specify the model names
+
+#looping multiple models for plotting a single ROC Curve to evaluate models performance
+for plots in range(0,4):
+    fpr, tpr, thresh = metrics.roc_curve(y_test, model_predictions[plots])
+    auc = metrics.roc_auc_score(y_test, model_predictions[plots])
+    plt.plot(fpr,tpr,label=models[plots]+str(auc))
+    plt.legend(loc=0)
+    plt.xlabel('1 - Specificity')
+    plt.ylabel('Sensitivity')
+    plt.title('Receiver Operating Characteristic for SMOTE sampled data')
+    print(models[plots])
+    print(classification_report(y_test,model_predictions[plots]))
+    plt.savefig('Balanced_ROC.png')
+\end{lstlisting}
+\FloatBarrier
+\begin{lstlisting}[language=R, caption= RF ROC,label=lst:B.2]
+
+#ROC Curve
+RF_roc = predict(RF_model,cdf_test,type = 'prob')[,2]
+RF_roc =  prediction(RF_roc,cdf_test$Churn)
+eval_ = performance(RF_roc,'acc')
+plot(eval_)
+
+\end{lstlisting}
+\FloatBarrier
+\begin{lstlisting}[language=R, caption= RF ROC,label=lst:B.3]
+#Variable Importance 
+plot.new()
+varImpPlot(RF_model,type = 1)
+abline(v = 45, col= 'blue')
+#This plot resembles the important parameters in RF prediction
+\end{lstlisting}
+\FloatBarrier
+\begin{lstlisting}[language=R, caption= Relation Plot,label=lst:B.4]
+# Correlation with the Target Variable
+ggplot(customer_df, aes(x=international.plan, y=Churn)) +
+  geom_point(shape=1) +    
+  geom_smooth(method=lm)
+
+ggplot(customer_df, aes(x=total.day.minutes, y=Churn)) +
+  geom_smooth(method=lm)
+
+ggplot(customer_df, aes(x=total.day.charge, y=Churn)) +
+  geom_smooth(method=lm)
+
+ggplot(customer_df, aes(x=number.customer.service.calls, y=Churn)) +
+  geom_smooth(method=lm)
+#All these plots shows a positive relation with the Target Variable 
+\end{lstlisting}
+\FloatBarrier
+\begin{lstlisting}[language=R, caption=Correlation Plot,label=lst:B.5]
+corrgram(customer_df, order = F, lower.panel = panel.shade,
+         upper.panel=panel.pie, text.panel=panel.txt, main = "Correlation Plot")
+\end{lstlisting} 
+\begin{lstlisting}[language=Python, caption=US Heatmap,label=lst:B.6]
+states = states_.value_counts()
+state_ls = list(states.index)
+state_vs = list(states.values)
+import plotly.plotly as py
+import plotly.graph_objs as go 
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+init_notebook_mode(connected=True) 
+data = dict(type='choropleth',
+            colorscale = 'Picnic',
+            locations = state_ls,
+            z = state_vs,
+            locationmode = 'USA-states',
+            text = target,
+            marker = dict(line = dict(color = 'rgb(255,255,255)',width = 2)),
+            colorbar = {'title':"Total Customers"}
+            )
+layout = dict(title = 'US Customers Heatmap by State',
+              geo = dict(scope='usa'))
+choromap = go.Figure(data = [data],layout = layout)
+iplot(choromap)
+\end{lstlisting} 
+\FloatBarrier
+\begin{lstlisting}[language=Python, caption=Variable Importance,label=lst:B.7]
+vars_ = (pd.Series(model_RF.feature_importances_, index=X.columns)
+   .nlargest(14)
+   .plot(kind='barh'))
+plt.savefig('varz_imp.png')
+\end{lstlisting} 
 \end{document}
 
 
