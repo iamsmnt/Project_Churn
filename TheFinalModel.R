@@ -122,6 +122,10 @@ cdf_both = ovun.sample(Churn ~., data = cdf_train, method = 'both',
 cdf_ROSE = ROSE(Churn ~., data = cdf_train,
                 N = 5000,
                 seed = 221)$data
+
+
+
+
                 
 #######################################
 #      i) Decision Tree Model
@@ -233,3 +237,7 @@ KNN_Predictions = knn(scaled_train[,-18], scaled_test[,-18],
 #Confusion matrix
 Conf_matrix = table(scaled_test[,18], KNN_Predictions)
 confusionMatrix(Conf_matrix)
+
+
+
+############### END ################################
