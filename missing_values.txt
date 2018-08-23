@@ -1,2 +1,0 @@
-  x df1 df2 ncp log     
-  0   0   0   0   0   0 
