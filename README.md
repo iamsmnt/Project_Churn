@@ -11,5 +11,3 @@ SVM - 88%
 RF - 91%
 KNN - 78%
 Logistic Regression - 56%
-
-
