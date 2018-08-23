@@ -11,3 +11,8 @@ SVM - 88%
 RF - 91%
 KNN - 78%
 Logistic Regression - 56%
+
+
+Important Features:
+1. Total Day, Evening, International Calls
+2. Number of Customer Service Calls
