@@ -1,7 +1,6 @@
 # Project_Churn
 
-The project aims at reducing Customers' Churning. The model developed with an ensemble approach and Stratified K Fold Sampling to reduce
-the Variance and Bias due to Target Class Imbalance. 
+The project aims at reducing Customers' Churning with an ensemble approach and Stratified K Fold Sampling to reduce Variance and Bias due to Target Class Imbalance. 
 
 Positive response being False - 0 - Customers' who didn't Churn
 Negative response being True - 1 - Customers' who Churn
